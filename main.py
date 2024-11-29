@@ -1,11 +1,18 @@
 def main():
    book_file = "books/frankenstein.txt"
-   text = get_text (book_file)
+   text = get_text(book_file)
    word_count = word_counter(text)
    chars_dict = get_chars_dict(text)
    chars_list = get_chars_list(chars_dict)
 
-   print(build_report(chars_list))
+   print(f"--- Begin report of", book_file, "---")
+   print(word_count, "words were found in the document")
+   print("")
+   for i in chars_list:
+    print(f"The", i["letter"], "character was found", i["num"], "times")
+   print("--- End report ---")   
+
+
 
 def get_text(path):
     with open(path) as f:
@@ -37,6 +44,6 @@ def get_chars_list(chars):
     char_list.sort(reverse=True, key=lambda x: x["num"])
     return char_list
     # generates a list of dictionaries, then sorts them in descending order of occurence.
-    
+
     
 main()
