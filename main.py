@@ -3,7 +3,9 @@ def main():
    text = get_text (book_file)
    word_count = word_counter(text)
    chars_dict = get_chars_dict(text)
-   print(chars_dict)
+   chars_list = get_chars_list(chars_dict)
+
+   print(build_report(chars_list))
 
 def get_text(path):
     with open(path) as f:
@@ -25,6 +27,16 @@ def get_chars_dict(text):
             chars[lowered] = 1
     return chars
     # generates dictionary of characters in a text file
+
+def get_chars_list(chars):
+    char_list = []
+    for c in chars:
+        if c.isalpha() == True:
+            letter_dict = {"letter": c, "num": chars[c]}
+            char_list.append(letter_dict)
+    char_list.sort(reverse=True, key=lambda x: x["num"])
+    return char_list
+    # generates a list of dictionaries, then sorts them in descending order of occurence.
     
     
 main()
